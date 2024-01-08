@@ -1,21 +1,22 @@
 function sendReminder() {
 
   const headers = {
-    'Authorization': 'YOUR_FONNTE_TOKEN',
+    'Authorization': 'wwbpT3MUGUr4-LQKR#+Z',
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   };
 
   var spreadSheet = SpreadsheetApp.openByUrl(SpreadsheetApp.getActiveSpreadsheet().getUrl());
   var sheet = spreadSheet.getSheets()[0];
-  var rangeValues = sheet.getRange(2, 1, sheet.getLastRow() - 1, 5).getValues();
+  var rangeValues = sheet.getRange(2, 1, sheet.getLastRow() - 1, 6).getValues();
 
   for (var i in rangeValues) {
     var name = sheet.getRange(2 + Number(i), 1).getValue()
-    var typeactivity = sheet.getRange(2 + Number(i), 2).getValue()
-    var eventdate = sheet.getRange(2 + Number(i), 3).getValue()
-    var phoneNumber = sheet.getRange(2 + Number(i), 4).getValue()
-    var place = sheet.getRange(2 + Number(i), 5).getValue()
+    var eventtype = sheet.getRange(2 + Number(i), 2).getValue()
+    var agenda = sheet.getRange(2 + Number(i), 3).getValue()
+    var eventdate = sheet.getRange(2 + Number(i), 4).getValue()
+    var phoneNumber = sheet.getRange(2 + Number(i), 5).getValue()
+    var place = sheet.getRange(2 + Number(i), 6).getValue()
     var todayDate = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "dd MMMM yyyy");
 
     const requestBody = {
@@ -23,16 +24,16 @@ function sendReminder() {
       'message':
         '*_This is an auto generated message, please do not reply._*\r\n\r\n' +
         'Dear ' + name + ',\r\n' +
-        'Ini adalah pengingat tentang acara kegiatan Anda pada :\r\n\r\n' +
+        'Ini adalah pengingat tentang acara kegiatan "' + eventtype + '" pada :\r\n\r\n' +
         'Tanggal : ' + eventdate + '\r\n' +
-        'Agenda : ' + typeactivity + '\r\n' +
+        'Agenda : ' + agenda + '\r\n' +
         'Lokasi : ' + place + '\r\n\r\n' +
         'Mohon untuk datang tepat waktu. Atas perhatiannya kami ucapkan terima kasih.'
     };
 
     var bodyMessage = JSON.stringify(requestBody);
-    var result = sheet.getRange(2 + Number(i), 6);
-    var remark = sheet.getRange(2 + Number(i), 7);
+    var result = sheet.getRange(2 + Number(i), 7);
+    var remark = sheet.getRange(2 + Number(i), 8);
 
     try {
       if (result.isBlank() || result.getValue() === 'FAILED') {
