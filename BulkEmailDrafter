@@ -1,0 +1,103 @@
+var EMAIL_DRAFTED = "EMAIL DRAFTED";
+
+function draftMyEmails() {
+  var sheet = SpreadsheetApp.getActiveSheet(); 
+  var startRow = 2;                            
+  var numRows = sheet.getLastRow() - 1;        
+  var lastColumn = sheet.getLastColumn();      
+  var dataRange = sheet.getRange(startRow, 1, numRows, lastColumn) 
+  var data = dataRange.getValues();            
+  
+  for (var i = 0; i < data.length; ++i) {
+    var row = data[i];  
+    var Hari_Tanggal = row[1];
+    var Waktu = row[2];
+    var Link_Daring = row[3];
+    var NPM = row[4];
+    var Nama_Mahasiswa = row[5];
+    var dosen1 = row[18];               
+    var dosen2 = row[20];                       
+    var dosen3 = row[22];
+    var dosen4 = row[24];                   
+    var emailmerge = row[26];                    
+    var emailStatus = row[lastColumn - 1];  
+    
+    if (emailStatus !== EMAIL_DRAFTED) {  
+    
+      var emailBody =  '<p> Kepada Yth. </p>';
+          emailBody += '<p>' + dosen1 + '</p>';
+          emailBody += '<p>' + dosen2 + '</p>'; 
+          emailBody += '<p>' + dosen3 + '</p>';
+          emailBody += '<p>' + dosen4 + '</p>';
+          
+          emailBody += '<p> Sidang Skripsi Luring mahasiswa atas nama <strong>'+Nama_Mahasiswa+'</strong> dengan NPM <strong>'+NPM+' </strong> akan diselenggarakan pada jadwal berikut: Hari <strong>'+Hari_Tanggal+'</strong>, Pukul <strong>'+Waktu+'</strong></p>';
+          emailBody += '<p> </p>';  
+          emailBody += '<p> Ruangan untuk sidang skripsi luring ini terdapat di <strong> '+Link_Daring+' </strong> </p>';
+          emailBody += '<p> Draft laporan skripsi, berita acara sidang proposal, berita acara sidang skripsi, serta form nilai mahasiswa yang bersangkutan turut saya lampirkan dalam email ini. </p>';
+          emailBody += '<p> </p>';  
+          emailBody += '<p> Mohon bantuan Ketua Sidang untuk dapat mengumpulkan Berita Acara Sidang dan Form Nilai, lalu mengirimkan via google form berikut adalah tautannya <strong> https://forms.gle/WJ896YFrc6SqKzKz5 </strong> </p>'
+          emailBody += '<p> </p>'; 
+          emailBody += '<p> Silakan jika ada pertanyaan atau saran. Terima kasih atas perhatian dan kerja samanya.</p>';
+          emailBody += '<p> </p>';
+          emailBody += '<p> <strong> Catatan: Tolong diabaikan perbedaan ruangan pada berkas berita acara yang berbeda. Gunakan Google Calendar sebagai panduan jadwal untuk Bapak/Ibu sekalian. </strong> </p>';  
+          
+      // Get files from Google Drive folder pertama FORM NILAI & BAP
+      var folderId1 = "YOUR_ID_FOLDER"; // ID folder Google Drive pertama
+      var files1 = DriveApp.getFolderById(folderId1).getFiles();
+      var attachments = [];
+      
+      // Get files from Google Drive folder kedua BAP
+      var folderId2 = "YOUR_ID_FOLDER"; // ID folder Google Drive kedua
+      var files2 = DriveApp.getFolderById(folderId2).getFiles();
+      
+      // Get files from Google Drive folder ketiga SKRIPSI
+      var folderId3 = "YOUR_ID_FOLDER"; // ID folder Google Drive ketiga
+      var files3 = DriveApp.getFolderById(folderId3).getFiles();
+
+      while (files1.hasNext()) {
+        var file = files1.next();
+        var fileName = file.getName();
+        
+        // Mencocokkan dengan NPM
+        if (fileName.indexOf(NPM) !== -1) {
+          attachments.push(file.getAs("application/pdf"));
+        }
+      }
+      
+      while (files2.hasNext()) {
+        var file = files2.next();
+        var fileName = file.getName();
+        
+        // Mencocokkan dengan NPM
+        if (fileName.indexOf(NPM) !== -1) {
+          attachments.push(file.getAs("application/pdf"));
+        }
+      }
+      
+      while (files3.hasNext()) {
+        var file = files3.next();
+        var fileName = file.getName();
+        
+        // Mencocokkan dengan NPM
+        if (fileName.indexOf(NPM) !== -1) {
+          attachments.push(file.getAs("application/pdf"));
+        }
+      }
+
+      // Create the email draft with attachments
+      GmailApp.createDraft(
+        emailmerge,            // Penerima
+        'SIDANG SKRIPSI LURING '+ Nama_Mahasiswa +' (' + NPM + ')' ,  // Subjek
+        '',                     // Isi email (teks biasa)
+        {
+          htmlBody: emailBody,  // Opsi: Isi email (HTML)
+          markImportant: true, // Menandai email sebagai penting
+          attachments: attachments  // Lampiran
+        }
+      );
+      
+      sheet.getRange(startRow + i, lastColumn).setValue(EMAIL_DRAFTED); // Update kolom terakhir dengan "EMAIL_DRAFTED"
+      SpreadsheetApp.flush(); // Memastikan sel terakhir diperbarui segera
+    }
+  }
+}
