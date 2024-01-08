@@ -1,4 +1,4 @@
-function sendReminder() {
+function sendMessage() {
 
   const headers = {
     'Authorization': 'YOUR_FONNTE_TOKEN',
@@ -6,8 +6,8 @@ function sendReminder() {
     'Accept': 'application/json'
   };
 
-  var spreadSheet = SpreadsheetApp.openByUrl(SpreadsheetApp.getActiveSpreadsheet().getUrl());
-  var sheet = spreadSheet.getSheets()[0];
+  var spreadSheet = SpreadsheetApp.openById('YOUR_SPREADSHEET_ID');
+  var sheet = spreadSheet.getSheetByName('YOUR_SHEET');
   var rangeValues = sheet.getRange(2, 1, sheet.getLastRow() - 1, 6).getValues();
 
   for (var i in rangeValues) {
