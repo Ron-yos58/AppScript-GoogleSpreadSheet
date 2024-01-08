@@ -1,7 +1,7 @@
 function sendReminder() {
 
   const headers = {
-    'Authorization': 'wwbpT3MUGUr4-LQKR#+Z',
+    'Authorization': 'YOUR_FONNTE_TOKEN',
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   };
