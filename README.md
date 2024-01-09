@@ -7,7 +7,9 @@
 ## AppScriptSendMessages
 
 
-https://github.com/Ron-yos58/AppScript-GoogleSpreadSheet/assets/101969702/a5638f84-3b5d-4808-b55c-df77ba2c0007
+https://github.com/Ron-yos58/AppScript-GoogleSpreadSheet/assets/101969702/6a02084f-701f-4eed-8c31-e8ba0946548d
+
+
 
 
 
