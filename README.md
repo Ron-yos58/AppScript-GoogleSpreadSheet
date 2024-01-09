@@ -1,5 +1,6 @@
-Contoh Spreadsheet 
+Sample Spreadsheet (Please to duplicate this document if you wish to experiment with it)
 - [AppScriptSendMessages](https://docs.google.com/spreadsheets/d/1cUaVsq3jtZ0A6YEBz3RLMJhqRU97aHKXkuow1QA2QCA/edit#gid=0)
+  - [Register Fonnte Account](https://fonnte.com/)
 
 
 <!---
