@@ -1,0 +1,22 @@
+function hyperlinkCells() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getActiveSheet();
+  var folder = DriveApp.getFolderById("YOUR_FOLDER_ID");
+  
+  var selectedRange = sheet.getActiveRange();
+  var data = selectedRange.getValues();
+  
+  for (var i = 0; i < data.length; i++) {
+    var cellValue = data[i][0].toString();
+    var files = folder.getFilesByName(cellValue);
+    
+    while (files.hasNext()) {
+      var file = files.next();
+      var fileUrl = file.getUrl();
+      var hyperlink = '=HYPERLINK("' + fileUrl + '"; "' + cellValue + '")';
+      
+      // Mengisi sel sebelah kanan dengan hyperlink
+      sheet.getRange(selectedRange.getRow() + i, selectedRange.getColumn() + 1).setValue(hyperlink);
+    }
+  }
+}
