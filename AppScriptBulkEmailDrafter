@@ -1,7 +1,8 @@
 var EMAIL_DRAFTED = "EMAIL DRAFTED";
 
 function draftMyEmails() {
-  var sheet = SpreadsheetApp.getActiveSheet(); 
+  var spreadSheet = SpreadsheetApp.openById('YOUR_SPREADSHEET_ID');
+  var sheet = spreadSheet.getSheetByName('YOUR_SHEET');
   var startRow = 2;                            
   var numRows = sheet.getLastRow() - 1;        
   var lastColumn = sheet.getLastColumn();      
@@ -42,16 +43,16 @@ function draftMyEmails() {
           emailBody += '<p> <strong> Catatan: Tolong diabaikan perbedaan ruangan pada berkas berita acara yang berbeda. Gunakan Google Calendar sebagai panduan jadwal untuk Bapak/Ibu sekalian. </strong> </p>';  
           
       // Get files from Google Drive folder pertama FORM NILAI & BAP
-      var folderId1 = "YOUR_ID_FOLDER"; // ID folder Google Drive pertama
+      var folderId1 = "YOUR_ID_FOLDER1"; // ID folder Google Drive pertama
       var files1 = DriveApp.getFolderById(folderId1).getFiles();
       var attachments = [];
       
       // Get files from Google Drive folder kedua BAP
-      var folderId2 = "YOUR_ID_FOLDER"; // ID folder Google Drive kedua
+      var folderId2 = "YOUR_ID_FOLDER2"; // ID folder Google Drive kedua
       var files2 = DriveApp.getFolderById(folderId2).getFiles();
       
       // Get files from Google Drive folder ketiga SKRIPSI
-      var folderId3 = "YOUR_ID_FOLDER"; // ID folder Google Drive ketiga
+      var folderId3 = "YOUR_ID_FOLDER3"; // ID folder Google Drive ketiga
       var files3 = DriveApp.getFolderById(folderId3).getFiles();
 
       while (files1.hasNext()) {
