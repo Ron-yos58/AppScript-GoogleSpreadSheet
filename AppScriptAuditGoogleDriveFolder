@@ -1,0 +1,26 @@
+function auditDriveFolder() {
+  // Replace the folder ID and spreadsheet ID with your own
+  var folderId = "1N3B-aKI5zLHbQ5q9hktny6erWJCN5A_6";
+  var spreadsheetId = "1FDoBglNTpLHtqUoTfZSQgAvizbkHnx8xhagYXfTEBN4";
+  var sheetName = "Proses Audit";
+
+  // Open the spreadsheet
+  var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+  var sheet = spreadsheet.getSheetByName(sheetName);
+
+  // Clear existing data in the sheet
+  sheet.clear();
+
+  // Write headers to the sheet
+  sheet.getRange(1, 1).setValue("File Name");
+  sheet.getRange(1, 2).setValue("File URL");
+
+  // Recursively audit the Google Drive folder
+  var files = auditFolder(folderId);
+
+  // Write file information to the sheet
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    sheet.appendRow([file.getName(), file.getUrl()]);
+  }
+}
