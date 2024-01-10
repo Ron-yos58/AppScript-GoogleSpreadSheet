@@ -20,7 +20,7 @@ function draftMyEmails() {
     var dosen2 = row[7];                       
     var dosen3 = row[8];
     var dosen4 = row[9];                   
-    var emailmerge = row[10];                    
+    var emailmerge = row[15];                    
     var emailStatus = row[lastColumn - 1];  
     
     if (emailStatus !== EMAIL_DRAFTED) {  
