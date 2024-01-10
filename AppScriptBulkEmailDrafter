@@ -16,11 +16,11 @@ function draftMyEmails() {
     var Link_Daring = row[3];
     var NPM = row[4];
     var Nama_Mahasiswa = row[5];
-    var dosen1 = row[18];               
-    var dosen2 = row[20];                       
-    var dosen3 = row[22];
-    var dosen4 = row[24];                   
-    var emailmerge = row[26];                    
+    var dosen1 = row[6];               
+    var dosen2 = row[7];                       
+    var dosen3 = row[8];
+    var dosen4 = row[9];                   
+    var emailmerge = row[10];                    
     var emailStatus = row[lastColumn - 1];  
     
     if (emailStatus !== EMAIL_DRAFTED) {  
@@ -36,11 +36,9 @@ function draftMyEmails() {
           emailBody += '<p> Ruangan untuk sidang skripsi luring ini terdapat di <strong> '+Link_Daring+' </strong> </p>';
           emailBody += '<p> Draft laporan skripsi, berita acara sidang proposal, berita acara sidang skripsi, serta form nilai mahasiswa yang bersangkutan turut saya lampirkan dalam email ini. </p>';
           emailBody += '<p> </p>';  
-          emailBody += '<p> Mohon bantuan Ketua Sidang untuk dapat mengumpulkan Berita Acara Sidang dan Form Nilai, lalu mengirimkan via google form berikut adalah tautannya <strong> https://forms.gle/WJ896YFrc6SqKzKz5 </strong> </p>'
+          emailBody += '<p> Mohon bantuan Ketua Sidang untuk dapat mengumpulkan Berita Acara Sidang dan Form Nilai, lalu mengirimkannya kepada Kaprodi </p>;
           emailBody += '<p> </p>'; 
           emailBody += '<p> Silakan jika ada pertanyaan atau saran. Terima kasih atas perhatian dan kerja samanya.</p>';
-          emailBody += '<p> </p>';
-          emailBody += '<p> <strong> Catatan: Tolong diabaikan perbedaan ruangan pada berkas berita acara yang berbeda. Gunakan Google Calendar sebagai panduan jadwal untuk Bapak/Ibu sekalian. </strong> </p>';  
           
       // Get files from Google Drive folder pertama FORM NILAI & BAP
       var folderId1 = "YOUR_ID_FOLDER1"; // ID folder Google Drive pertama
