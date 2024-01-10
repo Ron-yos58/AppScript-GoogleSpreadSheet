@@ -40,7 +40,7 @@ function draftMyEmails() {
           emailBody += '<p> </p>'; 
           emailBody += '<p> Silakan jika ada pertanyaan atau saran. Terima kasih atas perhatian dan kerja samanya.</p>';
           
-      // Get files from Google Drive folder pertama FORM NILAI & BAP
+      // Get files from Google Drive folder pertama FORM NILAI & BERITA ACARA
       var folderId1 = "YOUR_ID_FOLDER1"; // ID folder Google Drive pertama
       var files1 = DriveApp.getFolderById(folderId1).getFiles();
       var attachments = [];
