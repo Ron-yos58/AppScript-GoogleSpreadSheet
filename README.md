@@ -11,6 +11,8 @@ https://github.com/Ron-yos58/AppScript-GoogleSpreadSheet/assets/101969702/6a0208
 ### 💡 AppScriptBulkEmailDrafter
 https://github.com/Ron-yos58/AppScript-GoogleSpreadSheet/assets/101969702/ee465e81-4501-484d-aacf-248800092d16
 
+# ✨ Contribution
+Anyone can contribute! Just create a pull request
 
 
 
