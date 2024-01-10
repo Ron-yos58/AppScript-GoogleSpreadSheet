@@ -6,14 +6,13 @@
 ---
 # Demo Video
 ### AppScriptSendMessages
-
-
 https://github.com/Ron-yos58/AppScript-GoogleSpreadSheet/assets/101969702/6a02084f-701f-4eed-8c31-e8ba0946548d
 
 ### AppScriptBulkEmailDrafter
+https://github.com/Ron-yos58/AppScript-GoogleSpreadSheet/assets/101969702/ee465e81-4501-484d-aacf-248800092d16
 
 
-https://github.com/Ron-yos58/AppScript-GoogleSpreadSheet/assets/101969702/af0865c3-2785-4583-b9ab-188ac6abb26f
+
 
 
 
