@@ -1,4 +1,4 @@
-function auditDriveFolder_SuratMasuk() {
+function auditDriveFolder_AllData() {
   // Replace the folder ID and spreadsheet ID with your own
   var folderId = "FOLDER_ID";
   var spreadsheetId = "SPREADSHEET_ID";
