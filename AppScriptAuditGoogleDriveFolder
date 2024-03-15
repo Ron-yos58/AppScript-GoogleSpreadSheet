@@ -1,8 +1,8 @@
-function auditDriveFolder() {
+function auditDriveFolder_SuratMasuk() {
   // Replace the folder ID and spreadsheet ID with your own
-  var folderId = "1N3B-aKI5zLHbQ5q9hktny6erWJCN5A_6";
-  var spreadsheetId = "1FDoBglNTpLHtqUoTfZSQgAvizbkHnx8xhagYXfTEBN4";
-  var sheetName = "Proses Audit";
+  var folderId = "FOLDER_ID";
+  var spreadsheetId = "SPREADSHEET_ID";
+  var sheetName = "SHEET_NAME";
 
   // Open the spreadsheet
   var spreadsheet = SpreadsheetApp.openById(spreadsheetId);
@@ -14,6 +14,7 @@ function auditDriveFolder() {
   // Write headers to the sheet
   sheet.getRange(1, 1).setValue("File Name");
   sheet.getRange(1, 2).setValue("File URL");
+  sheet.getRange(1, 3).setValue("Date Created");
 
   // Recursively audit the Google Drive folder
   var files = auditFolder(folderId);
@@ -21,6 +22,24 @@ function auditDriveFolder() {
   // Write file information to the sheet
   for (var i = 0; i < files.length; i++) {
     var file = files[i];
-    sheet.appendRow([file.getName(), file.getUrl()]);
+    sheet.appendRow([file.getName(), file.getUrl(), file.getDateCreated()]);
+  }
+  
+  // Recursively audit a Google Drive folder
+  function auditFolder(folderId) {
+    var folder = DriveApp.getFolderById(folderId);
+    var files = folder.getFiles();
+    var fileList = [];
+    while (files.hasNext()) {
+      var file = files.next();
+      fileList.push(file);
+    }
+    var subFolders = folder.getFolders();
+    while (subFolders.hasNext()) {
+      var subFolder = subFolders.next();
+      var subFolderFiles = auditFolder(subFolder.getId());
+      fileList = fileList.concat(subFolderFiles);
+    }
+    return fileList;
   }
 }
