@@ -1,0 +1,51 @@
+function renameFilesInFolderAndSubfolders() {
+  var spreadsheetId = "SPREADSHEET_ID";
+  var sheetName = "SHEET_NAME";
+  var folderId = "FOLDER_ID";
+
+  var sheet = SpreadsheetApp.openById(spreadsheetId).getSheetByName(sheetName);
+  var range = sheet.getRange("A2:C" + sheet.getLastRow());
+  var data = range.getValues();
+
+  var mainFolder = DriveApp.getFolderById(folderId);
+  processFolder(mainFolder, data, sheet);
+}
+
+function processFolder(folder, data, sheet) {
+  var files = folder.getFiles();
+  while (files.hasNext()) {
+    var file = files.next();
+    var oldName = file.getName();
+    var newName = getNewName(data, oldName);
+    if (newName !== "") {
+      file.setName(newName);
+      markAsDone(sheet, oldName);
+    }
+  }
+
+  var subfolders = folder.getFolders();
+  while (subfolders.hasNext()) {
+    var subfolder = subfolders.next();
+    processFolder(subfolder, data, sheet);
+  }
+}
+
+function getNewName(data, oldName) {
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][0] == oldName) {
+      return data[i][1];
+    }
+  }
+  return "";
+}
+
+function markAsDone(sheet, oldName) {
+  var range = sheet.getRange("A2:A" + sheet.getLastRow());
+  var data = range.getValues();
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][0] == oldName) {
+      sheet.getRange("C" + (i + 2)).setValue("Done");
+      break;
+    }
+  }
+}
